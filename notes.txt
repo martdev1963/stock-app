@@ -1,0 +1,622 @@
+Scalable Flask Stock Market App for Vercel
+https://stockanalysis.com/stocks/
+Here's a complete Flask application that displays stock market data using a free API (Alpha Vantage) and is configured for deployment on Vercel.
+
+Project Structure
+
+stock-app/
+├── app.py                # Main Flask application
+├── requirements.txt      # Python dependencies
+├── vercel.json           # Vercel configuration
+├── static/
+│   └── style.css         # CSS styles
+└── templates/
+    └── index.html        # HTML template
+
+Deployment Instructions
+
+    Sign up for Alpha Vantage API Key:
+
+        Go to Alpha Vantage and get a free API key
+
+        The demo key works but has limited requests
+
+    Deploy to Vercel:
+
+        Install Vercel CLI: npm install -g vercel
+
+        Login: vercel login
+
+        In your project directory: vercel
+
+    Set Environment Variable:
+
+        In Vercel dashboard, go to your project settings
+
+        Add environment variable: ALPHA_VANTAGE_API_KEY with your API key
+
+Features
+
+    Responsive design that works on mobile and desktop
+
+    Option to view daily or intraday (5min interval) data
+
+    Clean, modern UI with interactive elements
+
+    Error handling for API requests
+
+    Caching (via Alpha Vantage) to minimize API calls
+
+    Scalable architecture ready for additional features
+
+Potential Enhancements
+
+    Add caching with Redis or Flask-Caching
+
+    Implement more API functions (e.g., technical indicators)
+
+    Add charts using Chart.js or similar
+
+    Support for multiple stock symbols
+
+    User authentication and saved portfolios
+
+This app is ready for deployment on Vercel and provides a solid foundation for a stock market data visualization tool.
+
+Here are several free stock market APIs that you can use as alternatives to Alpha Vantage in your Flask app. 
+I'll include their key features, limitations, and how to modify your app to work with each:
+1. Yahoo Finance API (via yfinance)
+
+    Best for: Comprehensive data, easy to use
+
+    Rate Limit: None (but be reasonable)
+
+    Data: Real-time (15 min delay), historical, fundamentals
+
+Each API has different strengths:
+
+    For most comprehensive free data: Yahoo Finance (yfinance)
+
+    For fundamental data: Financial Modeling Prep
+
+    For real-time data: Twelve Data or Polygon.io
+
+    For global markets: MarketStack
+
+Remember to always check the current API terms as free tiers can change.
+
+
+$ python --version
+Python 3.12.0
+
+$ pip --version
+pip 25.1.1 from C:\Python312\Lib\site-packages\pip (python 3.12)
+
+
+SHELL_OUTPUT:
+
+Martin@DESKTOP-HTLQ9GM MINGW64 ~/Documents/Coding/stock-app (main)
+$ flask run
+Usage: flask run [OPTIONS]
+Try 'flask run --help' for help.
+
+Error: While importing 'app', an ImportError was raised:
+
+Traceback (most recent call last):
+  File "C:\Users\Martin\Documents\Coding\stock-app\venv\Lib\site-packages\flask\cli.py", line 218, in locate_app
+    __import__(module_name)
+  File "C:\Users\Martin\Documents\Coding\stock-app\app.py", line 5, in <module>
+    import yfinance as yf
+ModuleNotFoundError: No module named 'yfinance'
+
+(venv) 
+Martin@DESKTOP-HTLQ9GM MINGW64 ~/Documents/Coding/stock-app (main)
+$ source venv/Scripts/activate
+(venv) 
+Martin@DESKTOP-HTLQ9GM MINGW64 ~/Documents/Coding/stock-app (main)
+$ pip install yfinance
+Collecting yfinance
+  Obtaining dependency information for yfinance from https://files.pythonhosted.org/packages/c9/1e/631c80e0f97aef46eb73549b9b0f60d94057294e040740f4cad0cb1f48e4/yfinance-0.2.65-py2.py3-none-any.whl.metadata
+  Downloading yfinance-0.2.65-py2.py3-none-any.whl.metadata (5.8 kB)
+Collecting pandas>=1.3.0 (from yfinance)
+  Obtaining dependency information for pandas>=1.3.0 from https://files.pythonhosted.org/packages/80/a5/3a92893e7399a691bad7664d977cb5e7c81cf666c81f89ea76ba2bff483d/pandas-2.3.1-cp312-cp312-win_amd64.whl.metadata
+  Downloading pandas-2.3.1-cp312-cp312-win_amd64.whl.metadata (19 kB)
+Collecting numpy>=1.16.5 (from yfinance)
+  Obtaining dependency information for numpy>=1.16.5 from https://files.pythonhosted.org/packages/b1/3e/e28f4c1dd9e042eb57a3eb652f200225e311b608632bc727ae378623d4f8/numpy-2.3.1-cp312-cp312-win_amd64.whl.metadata
+  Downloading numpy-2.3.1-cp312-cp312-win_amd64.whl.metadata (60 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.9/60.9 kB 816.8 kB/s eta 0:00:00
+Requirement already satisfied: requests>=2.31 in c:\users\martin\documents\coding\stock-app\venv\lib\site-packages (from yfinance) (2.31.0)
+Collecting multitasking>=0.0.7 (from yfinance)
+  Using cached multitasking-0.0.12-py3-none-any.whl
+Collecting platformdirs>=2.0.0 (from yfinance)
+  Obtaining dependency information for platformdirs>=2.0.0 from https://files.pythonhosted.org/packages/fe/39/979e8e21520d4e47a0bbe349e2713c0aac6f3d853d0e5b34d76206c439aa/platformdirs-4.3.8-py3-none-any.whl.metadata
+  Downloading platformdirs-4.3.8-py3-none-any.whl.metadata (12 kB)
+Collecting pytz>=2022.5 (from yfinance)
+  Obtaining dependency information for pytz>=2022.5 from https://files.pythonhosted.org/packages/81/c4/34e93fe5f5429d7570ec1fa436f1986fb1f00c3e0f43a589fe2bbcd22c3f/pytz-2025.2-py2.py3-none-any.whl.metadata
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting frozendict>=2.3.4 (from yfinance)
+  Obtaining dependency information for frozendict>=2.3.4 from https://files.pythonhosted.org/packages/ba/d0/d482c39cee2ab2978a892558cf130681d4574ea208e162da8958b31e9250/frozendict-2.4.6-py312-none-any.whl.metadata
+  Downloading frozendict-2.4.6-py312-none-any.whl.metadata (23 kB)
+Collecting peewee>=3.16.2 (from yfinance)
+  Using cached peewee-3.18.2-py3-none-any.whl
+Collecting beautifulsoup4>=4.11.1 (from yfinance)
+  Obtaining dependency information for beautifulsoup4>=4.11.1 from https://files.pythonhosted.org/packages/50/cd/30110dc0ffcf3b131156077b90e9f60ed75711223f306da4db08eff8403b/beautifulsoup4-4.13.4-py3-none-any.whl.metadata
+  Using cached beautifulsoup4-4.13.4-py3-none-any.whl.metadata (3.8 kB)
+Collecting curl_cffi>=0.7 (from yfinance)
+  Obtaining dependency information for curl_cffi>=0.7 from https://files.pythonhosted.org/packages/22/6e/0194d04312fbf6eed0d0fea6dfd361795fcfd53e9dca259a8ad45ff1ccca/curl_cffi-0.12.0-cp39-abi3-win_amd64.whl.metadata
+  Downloading curl_cffi-0.12.0-cp39-abi3-win_amd64.whl.metadata (15 kB)
+Collecting protobuf>=3.19.0 (from yfinance)
+  Obtaining dependency information for protobuf>=3.19.0 from https://files.pythonhosted.org/packages/44/3a/b15c4347dd4bf3a1b0ee882f384623e2063bb5cf9fa9d57990a4f7df2fb6/protobuf-6.31.1-cp310-abi3-win_amd64.whl.metadata
+  Downloading protobuf-6.31.1-cp310-abi3-win_amd64.whl.metadata (593 bytes)
+Collecting websockets>=13.0 (from yfinance)
+  Obtaining dependency information for websockets>=13.0 from https://files.pythonhosted.org/packages/7d/71/abf2ebc3bbfa40f391ce1428c7168fb20582d0ff57019b69ea20fa698043/websockets-15.0.1-cp312-cp312-win_amd64.whl.metadata
+  Downloading websockets-15.0.1-cp312-cp312-win_amd64.whl.metadata (7.0 kB)
+Collecting soupsieve>1.2 (from beautifulsoup4>=4.11.1->yfinance)
+  Obtaining dependency information for soupsieve>1.2 from https://files.pythonhosted.org/packages/e7/9c/0e6afc12c269578be5c0c1c9f4b49a8d32770a080260c333ac04cc1c832d/soupsieve-2.7-py3-none-any.whl.metadata
+  Using cached soupsieve-2.7-py3-none-any.whl.metadata (4.6 kB)
+Collecting typing-extensions>=4.0.0 (from beautifulsoup4>=4.11.1->yfinance)
+  Obtaining dependency information for typing-extensions>=4.0.0 from https://files.pythonhosted.org/packages/b5/00/d631e67a838026495268c2f6884f3711a15a9a2a96cd244fdaea53b823fb/typing_extensions-4.14.1-py3-none-any.whl.metadata
+  Using cached typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting cffi>=1.12.0 (from curl_cffi>=0.7->yfinance)
+  Obtaining dependency information for cffi>=1.12.0 from https://files.pythonhosted.org/packages/50/b9/db34c4755a7bd1cb2d1603ac3863f22bcecbd1ba29e5ee841a4bc510b294/cffi-1.17.1-cp312-cp312-win_amd64.whl.metadata
+  Using cached cffi-1.17.1-cp312-cp312-win_amd64.whl.metadata (1.6 kB)
+Requirement already satisfied: certifi>=2024.2.2 in c:\users\martin\documents\coding\stock-app\venv\lib\site-packages (from curl_cffi>=0.7->yfinance) (2025.7.14)
+Collecting python-dateutil>=2.8.2 (from pandas>=1.3.0->yfinance)
+  Obtaining dependency information for python-dateutil>=2.8.2 from https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting tzdata>=2022.7 (from pandas>=1.3.0->yfinance)
+  Obtaining dependency information for tzdata>=2022.7 from https://files.pythonhosted.org/packages/5c/23/c7abc0ca0a1526a0774eca151daeb8de62ec457e77262b66b359c3c7679e/tzdata-2025.2-py2.py3-none-any.whl.metadata
+  Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in c:\users\martin\documents\coding\stock-app\venv\lib\site-packages (from requests>=2.31->yfinance) (3.4.2)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\martin\documents\coding\stock-app\venv\lib\site-packages (from requests>=2.31->yfinance) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\martin\documents\coding\stock-app\venv\lib\site-packages (from requests>=2.31->yfinance) (2.5.0)
+Collecting pycparser (from cffi>=1.12.0->curl_cffi>=0.7->yfinance)
+  Obtaining dependency information for pycparser from https://files.pythonhosted.org/packages/13/a3/a812df4e2dd5696d1f351d58b8fe16a405b234ad2886a0dab9183fb78109/pycparser-2.22-py3-none-any.whl.metadata
+  Using cached pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas>=1.3.0->yfinance)
+  Obtaining dependency information for six>=1.5 from https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl.metadata
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading yfinance-0.2.65-py2.py3-none-any.whl (119 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 119.4/119.4 kB 2.3 MB/s eta 0:00:00
+Using cached beautifulsoup4-4.13.4-py3-none-any.whl (187 kB)
+Downloading curl_cffi-0.12.0-cp39-abi3-win_amd64.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 4.3 MB/s eta 0:00:00
+Downloading frozendict-2.4.6-py312-none-any.whl (16 kB)
+Downloading numpy-2.3.1-cp312-cp312-win_amd64.whl (12.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 4.0 MB/s eta 0:00:00
+Downloading pandas-2.3.1-cp312-cp312-win_amd64.whl (11.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.0/11.0 MB 3.6 MB/s eta 0:00:00
+Downloading platformdirs-4.3.8-py3-none-any.whl (18 kB)
+Downloading protobuf-6.31.1-cp310-abi3-win_amd64.whl (435 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 435.3/435.3 kB 2.1 MB/s eta 0:00:00
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 kB 1.9 MB/s eta 0:00:00
+Downloading websockets-15.0.1-cp312-cp312-win_amd64.whl (176 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 176.8/176.8 kB 2.7 MB/s eta 0:00:00
+Using cached cffi-1.17.1-cp312-cp312-win_amd64.whl (181 kB)
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 3.5 MB/s eta 0:00:00
+Using cached soupsieve-2.7-py3-none-any.whl (36 kB)
+Using cached typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 347.8/347.8 kB 1.4 MB/s eta 0:00:00
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached pycparser-2.22-py3-none-any.whl (117 kB)
+Installing collected packages: pytz, peewee, multitasking, websockets, tzdata, typing-extensions, soupsieve, six, pycparser, protobuf, platformdirs, numpy, frozendict, python-dateutil, cffi, beautifulsoup4, pandas, curl_cffi, yfinance
+Successfully installed beautifulsoup4-4.13.4 cffi-1.17.1 curl_cffi-0.12.0 frozendict-2.4.6 multitasking-0.0.12 numpy-2.3.1 pandas-2.3.1 peewee-3.18.2 platformdirs-4.3.8 protobuf-6.31.1 pycparser-2.22 python-dateutil-2.9.0.post0 pytz-2025.2 six-1.17.0 soupsieve-2.7 typing-extensions-4.14.1 tzdata-2025.2 websockets-15.0.1 yfinance-0.2.65
+
+[notice] A new release of pip is available: 23.2.1 -> 25.1.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+(venv) 
+Martin@DESKTOP-HTLQ9GM MINGW64 ~/Documents/Coding/stock-app (main)
+$ pip show yfinance
+Name: yfinance
+Version: 0.2.65
+Summary: Download market data from Yahoo! Finance API
+Home-page: https://github.com/ranaroussi/yfinance
+Author: Ran Aroussi
+Author-email: ran@aroussi.com
+License: Apache
+Location: C:\Users\Martin\Documents\Coding\stock-app\venv\Lib\site-packages
+Requires: beautifulsoup4, curl_cffi, frozendict, multitasking, numpy, pandas, peewee, platformdirs, protobuf, pytz, requests, websockets
+Required-by:
+(venv) 
+
+DEBUGGING:
+
+This error occurs because there's a mismatch between how you're calling get_stock_data() and how the function is defined.
+Let's fix this issue:
+
+The Problem
+The error message shows:
+TypeError: get_stock_data() takes 1 positional argument but 2 were given
+
+This means in your app.py:
+
+    You defined get_stock_data() to accept only 1 parameter (symbol)
+
+    But you're trying to call it with 2 parameters (symbol and function)
+
+You should place this error handling check right after you get the data from yfinance but before processing it. 
+Here's exactly where it goes in your get_stock_data() function:
+python
+
+def get_stock_data(symbol, function='TIME_SERIES_DAILY'):
+    """Fetch stock data from API"""
+    if function == 'TIME_SERIES_INTRADAY':
+        # Intraday data logic
+        stock = yf.Ticker(symbol)
+        data = stock.history(period="1d", interval="5m")
+    else:
+        # Daily data logic
+        stock = yf.Ticker(symbol)
+        data = stock.history(period="1mo")
+    
+    # ===== PLACE THE ERROR HANDLING HERE =====
+    if data.empty:
+        return {
+            'symbol': symbol,
+            'data': [],
+            'meta': {'error': 'No data available for this symbol'}
+        }
+    # =========================================
+    
+    processed_data = []
+    for date, row in data.iterrows():
+        processed_data.append({
+            'date': date.strftime('%Y-%m-%d %H:%M:%S'),
+            'open': row['Open'],
+            'high': row['High'],
+            'low': row['Low'],
+            'close': row['Close'],
+            'volume': row['Volume']
+        })
+    
+    return {
+        'symbol': symbol,
+        'data': processed_data,
+        'meta': {'1. Information': 'Yahoo Finance Data'}
+    }
+
+Why this location?
+
+    After data fetch: We check immediately after getting the data from yfinance
+
+    Before processing: We avoid processing empty data which could cause errors
+
+    Early return: If there's no data, we return immediately with an error message
+
+Bonus: Update your template to show errors
+
+In your templates/index.html, add this near the top to display errors:
+html
+
+{% if stock_data.meta.error %}
+    <div class="error-message">
+        Error: {{ stock_data.meta.error }}
+    </div>
+{% endif %}
+
+Complete Flow:
+
+    Try to fetch data →
+
+    Check if empty →
+
+    If empty: return error structure →
+
+    If not empty: process data normally →
+
+    Template displays either error or data
+
+This makes your app more robust against invalid symbols or API issues.    
+
+All Stock Symbols
+https://stockanalysis.com/stocks/
+
+PROGNOSIS:  APP IS WORKING ON LOCAL SERVER.
+
+SHELL_OUTPUT:
+
+$ flask run
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+127.0.0.1 - - [22/Jul/2025 13:15:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:15:56] "GET /static/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:16:09] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:16:09] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [22/Jul/2025 13:18:57] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:18:57] "GET /static/style.css HTTP/1.1" 200 -
+$TSLA : possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+127.0.0.1 - - [22/Jul/2025 13:19:07] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:19:07] "GET /static/style.css HTTP/1.1" 304 -
+$TSLA : possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+127.0.0.1 - - [22/Jul/2025 13:19:15] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:19:15] "GET /static/style.css HTTP/1.1" 304 -
+$AACB: possibly delisted; no price data found  (period=1d)
+127.0.0.1 - - [22/Jul/2025 13:19:53] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:19:53] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [22/Jul/2025 13:19:57] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 13:19:57] "GET /static/style.css HTTP/1.1" 304 -
+
+should it work just as smoothly in vercel server?
+
+Your Flask app should work on Vercel, but there are some important considerations and modifications needed for smooth 
+deployment. Here's what you need to know:
+Key Adjustments Needed for Vercel
+
+    Serverless Compatibility:
+
+        Vercel expects serverless functions, not traditional Flask WSGI apps
+
+        You'll need to wrap your app in a serverless-compatible format
+
+    Required Changes:
+
+1. Update app.py for Vercel
+python
+
+# Add at the bottom of app.py (before the if __name__ block)
+def vercel_handler(request):
+    with app.app_context():
+        response = app.full_dispatch_request()
+        return {
+            'statusCode': response.status_code,
+            'headers': dict(response.headers),
+            'body': response.get_data(as_text=True)
+        }
+
+2. Update vercel.json Configuration
+json
+
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ]
+}
+
+3. Add wsgi.py (Optional but recommended)
+python
+
+from app import app
+
+if __name__ == "__main__":
+    app.run()
+
+Potential Issues and Solutions
+
+    yfinance Dependency:
+
+        Vercel's Python environment might need special handling for yfinance
+
+        Add this to requirements.txt:
+        text
+
+    yfinance==0.2.31
+    pandas==2.0.3  # Specific version to avoid conflicts
+
+Environment Variables:
+
+    Set ALPHA_VANTAGE_API_KEY in Vercel's environment variables
+
+    Even though you're using yfinance now, clean up unused code
+
+Cold Starts:
+
+    Serverless functions have cold start delays
+
+    Consider adding a warming endpoint:
+    python
+
+        @app.route('/warmup')
+        def warmup():
+            return "Ready", 200
+
+Deployment Checklist
+
+    Test Locally First:
+    bash
+
+vercel dev
+
+Required Files:
+
+    Ensure you have:
+
+        app.py (your main application)
+
+        vercel.json (configuration)
+
+        requirements.txt (dependencies)
+
+        wsgi.py (optional but recommended)
+
+Deployment Command:
+bash
+
+    vercel --prod
+
+Post-Deployment Tips
+
+    Monitor Logs:
+
+        Check Vercel's function logs for any runtime errors
+
+    Performance:
+
+        The free tier has limitations on execution duration (10s timeout)
+
+        For better performance, consider:
+
+            Adding caching
+
+            Using Vercel's Pro plan if needed
+
+    Alternative Approach:
+    If you encounter issues, consider using:
+    python
+
+    from vercel_python.wsgi import VercelWSGIApplication
+    application = VercelWSGIApplication(app)
+
+Your app should work on Vercel with these modifications, but be aware that:
+
+    yfinance might have different behavior in serverless environment
+
+    Stock data fetching might hit timeout limits on free tier
+
+    You may need to adjust the history period (1mo might be too long)
+
+Would you like me to provide a more optimized version specifically for Vercel's constraints?
+
+Yes, this is a complete and functional app.py for your stock market application that should work both locally and 
+when deployed to Vercel. Let me break down why this version is optimal:
+Key Components in This Version:
+
+    Essential Imports:
+
+        Flask core components
+
+        OS for environment variables
+
+        datetime for timestamp handling
+
+        yfinance for stock data
+
+    Improved get_stock_data() Function:
+
+        Simplified using yf.download() instead of Ticker()
+
+        Better error handling with try/except
+
+        Handles empty data gracefully
+
+        Processes data efficiently
+
+    Vercel-Specific Additions:
+
+        The vercel_handler function required for serverless deployment
+
+        Clean separation between app logic and deployment handler
+
+    Production-Ready Features:
+
+        Default values for symbol and timeframe
+
+        Proper error propagation to the frontend
+
+        Year display for footer/copyright
+
+What Makes This Complete:
+
+    Frontend-Backend Connection:
+
+        Receives form inputs via request.form
+
+        Passes processed data to index.html template
+
+    Deployment Compatibility:
+
+        Works with flask run locally
+
+        Includes Vercel serverless handler
+
+        Can be executed directly (python app.py)
+
+    Error Handling:
+
+        Catches and displays API errors
+
+        Handles empty/missing data
+
+        Returns structured error messages
+
+For Full Deployment, You'll Also Need:
+
+    requirements.txt:
+    text
+
+Flask==2.3.2
+yfinance==0.2.31
+pandas==1.5.3
+numpy==1.24.4
+python-dotenv==1.0.0
+
+vercel.json:
+json
+
+    {
+      "version": 2,
+      "builds": [
+        {
+          "src": "app.py",
+          "use": "@vercel/python"
+        }
+      ],
+      "routes": [
+        {
+          "src": "/(.*)",
+          "dest": "app.py"
+        }
+      ]
+    }
+
+    templates/index.html (your frontend)
+
+This version is more robust than your original because:
+
+    It has better error handling
+
+    Uses simpler yfinance methods
+
+    Is properly structured for Vercel
+
+    Maintains all the original functionality
+
+The only thing you might want to add is caching for the stock data requests if you expect high traffic, 
+but this complete version will work perfectly as-is.
+
+Key Changes Made:
+
+    Simplified dependencies:
+
+        Using older versions of pandas/numpy that have pre-built wheels
+
+        Removed unnecessary packages
+
+    Improved error handling:
+
+        Wrapped yfinance calls in try/except
+
+        Better empty data handling
+
+    Vercel-specific adjustments:
+
+        Added the required vercel_handler function
+
+        Simplified the stock data fetching logic
+
+
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Martin\AppData\Local\Temp\pip-build-env-6yxr8il_\overlay\Lib\site-packages\setuptools\__init__.py", line 10, in <module>
+    import distutils.core
+ModuleNotFoundError: No module named 'distutils'
+
+The error indicates that Python's distutils module is missing, which is typically included in Python's standard library 
+but might be unavailable in some installations. Here's how to fix this issue for both local development and Vercel deployment:
+
+
+
+

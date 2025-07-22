@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Data - {{ symbol }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>MAB Media Stock Market Data</h1>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="symbol">Stock Symbol:</label>
+                <input type="text" id="symbol" name="symbol" value="{{ symbol }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Time Frame:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="time_frame" value="daily" {% if time_frame == 'daily' %}checked{% endif %}>
+                        Daily
+                    </label>
+                    <label>
+                        <input type="radio" name="time_frame" value="intraday" {% if time_frame == 'intraday' %}checked{% endif %}>
+                        Intraday (5min)
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit">Get Data</button>
+        </form>
+        
+        {% if stock_data %}
+            <div class="stock-info">
+                <h2>{{ stock_data.symbol }}</h2>
+                {% if stock_data.meta %}
+                    <p class="meta-info">
+                        Last Refreshed: {{ stock_data.meta.get('3. Last Refreshed', 'N/A') }} | 
+                        Time Zone: {{ stock_data.meta.get('5. Time Zone', 'N/A') }}
+                    </p>
+                {% endif %}
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date/Time</th>
+                                <th>Open</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Close</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in stock_data.data %}
+                            <tr>
+                                <td>{{ entry.date }}</td>
+                                <td>{{ entry.open }}</td>
+                                <td>{{ entry.high }}</td>
+                                <td>{{ entry.low }}</td>
+                                <td>{{ entry.close }}</td>
+                                <td>{{ entry.volume }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <p class="error">Could not fetch stock data for {{ symbol }}. Please try again.</p>
+        {% endif %}
+        
+        <footer>
+            <p>&copy; {{ current_year }} Stock Market App | Powered by MAB Media Software Systems</p>
+        </footer>
+    </div>
+</body>
+</html>
